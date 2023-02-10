@@ -27,6 +27,7 @@ templates:
       - Game of Thrones
       - The Secret of Skinwalker Ranch
       - The Last of Us
+      - Truth Be Told
 
     transmission:
       host: transmission
