@@ -51,7 +51,8 @@ services:
   flexget:
     image: wiserain/flexget:3.5
     volumes:
-      - ./flexget:/config
+      - ./flexget/config:/config
+      - ./flexget/config.yml:/config/config.yml:ro
       - ./flexget/mediainfo.sh:/custom-cont-init.d/mediainfo.sh:ro
       - ${TORRENT_DOWNLOAD_DIR}:/downloads
       - ${PLEX_MULTIMEDIA_DIR}:/storage
