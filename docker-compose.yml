@@ -1,0 +1,35 @@
+version: "3.7"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  samba:
+    image: dperson/samba # no hay tag con versiones, solo latest
+    restart: unless-stopped
+    command: '-u "${SMB_USERNAME};${SMB_PASSWORD}" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
+    stdin_open: true
+    tty: true
+    environment:
+      - TZ=${TZ}
+    ports:
+      - 139:139
+      - 445:445
+    volumes:
+      - ${STORAGE_DIR}/multimedia:/media
+      - ${STORAGE_DIR}/torrents:/downloads
+  plex:
+    image: jaymoulin/plex:1.30.1.6562
+    expose:
+      - 32400
+      - 33400
+    # Descomentar si NO usas network_mode: "host"
+    # ports:
+    #   - 32400:32400
+    #   - 33400:33400
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ${PLEX_CONFIGURATION_DIR}:/root/Library/Application Support/Plex Media Server
+      - ${PLEX_MULTIMEDIA_DIR}:/media
+      - ${STORAGE_DIR}/tmp:/tmp
+    restart: unless-stopped
+    network_mode: "host" # Solo funciona en Linux  
