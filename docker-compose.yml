@@ -39,6 +39,7 @@ services:
     command: transmission-daemon -f -g /config
     volumes:
       - ./transmission/config:/config
+      - ./transmission/settings.json:/config/settings.json
       - ${TORRENT_DOWNLOAD_DIR}:/downloads
     ports:
       - 9091:9091
