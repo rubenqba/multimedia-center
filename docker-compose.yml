@@ -25,6 +25,7 @@ services:
     # ports:
     #   - 32400:32400
     #   - 33400:33400
+    hostname: plex
     environment:
       - TZ=${TZ}
     volumes:
@@ -47,18 +48,18 @@ services:
       - 9091
     restart: unless-stopped  
 
-  # flexget:
-  #   image: wiserain/flexget:3.5
-  #   volumes:
-  #     - ./flexget:/config
-  #     - ./flexget/custom-cont-init.d:/custom-cont-init.d
-  #     - ${TORRENT_DOWNLOAD_DIR}:/downloads
-  #     - ${PLEX_MULTIMEDIA_DIR}:/storage
-  #   ports:
-  #     - 5050:5050
-  #   environment:
-  #     - PUID=1001
-  #     - PGID=1001
-  #     - TORRENT_PLUGIN=transmission
-  #     - FG_WEBUI_PASSWD=${FLEXGET_UI_PASSWORD} # la puedes cambiar por la que quieras
-  #   restart: unless-stopped
+  flexget:
+    image: wiserain/flexget:3.5
+    volumes:
+      - ./flexget:/config
+      - ./flexget/mediainfo.sh:/custom-cont-init.d/mediainfo.sh:ro
+      - ${TORRENT_DOWNLOAD_DIR}:/downloads
+      - ${PLEX_MULTIMEDIA_DIR}:/storage
+    ports:
+      - 5050:5050
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TORRENT_PLUGIN=transmission
+      - FG_WEBUI_PASSWD=${FLEXGET_UI_PASSWORD} # la puedes cambiar por la que quieras
+    restart: unless-stopped
