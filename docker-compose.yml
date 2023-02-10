@@ -28,8 +28,37 @@ services:
     environment:
       - TZ=${TZ}
     volumes:
-      - ${PLEX_CONFIGURATION_DIR}:/root/Library/Application Support/Plex Media Server
+      - ./plex:/root/Library/Application Support/Plex Media Server
       - ${PLEX_MULTIMEDIA_DIR}:/media
-      - ${STORAGE_DIR}/tmp:/tmp
     restart: unless-stopped
     network_mode: "host" # Solo funciona en Linux  
+
+  transmission:
+    image : jaymoulin/transmission:3.00-1.6.1
+    command: transmission-daemon -f -g /config
+    volumes:
+      - ./transmission:/config
+      - ${TORRENT_DOWNLOAD_DIR}:/downloads
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    expose:
+      - 9091
+    restart: unless-stopped  
+
+  # flexget:
+  #   image: wiserain/flexget:3.5
+  #   volumes:
+  #     - ./flexget:/config
+  #     - ./flexget/custom-cont-init.d:/custom-cont-init.d
+  #     - ${TORRENT_DOWNLOAD_DIR}:/downloads
+  #     - ${PLEX_MULTIMEDIA_DIR}:/storage
+  #   ports:
+  #     - 5050:5050
+  #   environment:
+  #     - PUID=1001
+  #     - PGID=1001
+  #     - TORRENT_PLUGIN=transmission
+  #     - FG_WEBUI_PASSWD=${FLEXGET_UI_PASSWORD} # la puedes cambiar por la que quieras
+  #   restart: unless-stopped
