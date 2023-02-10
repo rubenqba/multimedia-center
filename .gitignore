@@ -1,2 +1,4 @@
 .env
-plex/
+plex/config
+transmission/
+flexget/config

@@ -26,6 +26,7 @@ templates:
       - The Walking Dead
       - Game of Thrones
       - The Secret of Skinwalker Ranch
+      - The Last of Us
 
     transmission:
       host: transmission

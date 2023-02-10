@@ -38,7 +38,7 @@ services:
     image : jaymoulin/transmission:3.00-1.6.1
     command: transmission-daemon -f -g /config
     volumes:
-      - ./transmission:/config
+      - ./transmission/config:/config
       - ${TORRENT_DOWNLOAD_DIR}:/downloads
     ports:
       - 9091:9091
