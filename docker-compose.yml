@@ -28,7 +28,7 @@ services:
     environment:
       - TZ=${TZ}
     volumes:
-      - ./plex:/root/Library/Application Support/Plex Media Server
+      - ./plex/config:/root/Library/Application Support/Plex Media Server
       - ${PLEX_MULTIMEDIA_DIR}:/media
     restart: unless-stopped
     network_mode: "host" # Solo funciona en Linux  
