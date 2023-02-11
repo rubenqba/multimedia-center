@@ -1,7 +1,7 @@
 web_server: yes
 
 schedules:
-  - tasks: '*'
+  - tasks: "*"
     interval:
       minutes: 30
 
@@ -9,28 +9,27 @@ templates:
   tv:
     regexp:
       reject:
-        - x265: {from: title}
+        - x265: { from: title }
     series:
       settings:
         tv:
-          # begin: S01E01
+          begin: S01E01
           # exact: yes
           propers: 12 hours
-          # quality: 720p
-          tracking: backfill
+          quality: 720p
       tv:
-      - Black Mirror
-      - Homeland
-      - SEAL Team
-      - Sherlock
-      - Silicon Valley
-      - Suits
-      - The Walking Dead
-      - Game of Thrones
-      - The Secret of Skinwalker Ranch
-      - The Last of Us
-      - Truth Be Told
-      - The Mandalorian
+        - Black Mirror
+        - Homeland
+        - SEAL Team
+        - Sherlock
+        - Silicon Valley
+        - Suits
+        - The Walking Dead
+        - Game of Thrones
+        - The Secret of Skinwalker Ranch
+        - The Last of Us
+        - Truth Be Told
+        - The Mandalorian
 
     transmission:
       host: transmission
@@ -51,8 +50,9 @@ tasks:
         - next_series_episodes:
             from_start: yes
       from:
-        - torrentz: good
-      # interval: 1 hour  # Search for expected episodes again every hour
+        - piratebay: yes
+        - argenteam: yes
+      interval: 1 hour # Search for expected episodes again every hour
     torrent_alive: 10
 
   sort_tv:
@@ -79,7 +79,7 @@ tasks:
           else
             cp "{{ location }}" "/storage/series/{{ tvdb_series_name }}/Season {{ series_season }}/{{ tvdb_series_name }} - {{ series_id }}{{ location | pathext }}"
           fi
-  
+
   sort_movies:
     priority: 2
     no_entries_ok: yes
@@ -93,14 +93,14 @@ tasks:
     exec:
       auto_escape: yes
       on_output:
-       for_entries: |
-         mkdir -p "/storage/films/{{ movie_name }} ({{ movie_year }})"
-         if mediainfo "{{ location }}" | grep EAC3; then
-            ffmpeg -hwaccel auto -y -i "{{ location }}" -map 0 -c:s copy -c:v copy -c:a ac3 -b:a 640k "/storage/films/{{ movie_name }} ({{ movie_year }})/{{ movie_name }} ({{ movie_year }}){{ location | pathext }}"
-         else
-           cp "{{ location }}" "/storage/films/{{ movie_name }} ({{ movie_year }})/{{ movie_name }} ({{ movie_year }}){{ location | pathext }}"
-         fi
-  
+        for_entries: |
+          mkdir -p "/storage/films/{{ movie_name }} ({{ movie_year }})"
+          if mediainfo "{{ location }}" | grep EAC3; then
+             ffmpeg -hwaccel auto -y -i "{{ location }}" -map 0 -c:s copy -c:v copy -c:a ac3 -b:a 640k "/storage/films/{{ movie_name }} ({{ movie_year }})/{{ movie_name }} ({{ movie_year }}){{ location | pathext }}"
+          else
+            cp "{{ location }}" "/storage/films/{{ movie_name }} ({{ movie_year }})/{{ movie_name }} ({{ movie_year }}){{ location | pathext }}"
+          fi
+
   remove_stale_torrents:
     from_transmission:
       host: transmission
