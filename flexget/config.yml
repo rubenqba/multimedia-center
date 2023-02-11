@@ -28,6 +28,7 @@ templates:
       - The Secret of Skinwalker Ranch
       - The Last of Us
       - Truth Be Told
+      - Small and Mighty
 
     transmission:
       host: transmission
@@ -37,7 +38,7 @@ templates:
 
 tasks:
   eztvrss:
-    rss: https://eztv.ag/ezrss.xml
+    rss: https://eztv.re/ezrss.xml
     template: tv
     priority: 2
   sort_tv:
