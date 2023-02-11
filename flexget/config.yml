@@ -51,7 +51,8 @@ tasks:
             from_start: yes
       from:
         - piratebay: yes
-        - argenteam: yes
+        - argenteam: 
+            force_subtitles: yes
       interval: 1 hour # Search for expected episodes again every hour
     torrent_alive: 10
 
