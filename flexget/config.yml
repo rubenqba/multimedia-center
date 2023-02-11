@@ -13,10 +13,11 @@ templates:
     series:
       settings:
         tv:
-          begin: S01E01
+          # begin: S01E01
           # exact: yes
           propers: 12 hours
           # quality: 720p
+          tracking: backfill
       tv:
       - Black Mirror
       - Homeland
