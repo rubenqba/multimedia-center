@@ -16,7 +16,7 @@ templates:
           begin: S01E01
           # exact: yes
           propers: 12 hours
-          quality: 720p
+          # quality: 720p
       tv:
       - Black Mirror
       - Homeland
