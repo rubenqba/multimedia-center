@@ -51,8 +51,9 @@ tasks:
         - next_series_episodes:
             from_start: yes
       from:
-        - torrentz: verified
+        - torrentz: good
       # interval: 1 hour  # Search for expected episodes again every hour
+    torrent_alive: 10
 
   sort_tv:
     priority: 2
