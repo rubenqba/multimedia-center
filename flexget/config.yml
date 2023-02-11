@@ -42,6 +42,17 @@ tasks:
     rss: https://eztv.re/ezrss.xml
     template: tv
     priority: 2
+
+  discover-series:
+    template: tv
+    discover:
+      what:
+        - next_series_episodes:
+            from_start: yes
+      from:
+        - torrentz: verified
+      # interval: 1 hour  # Search for expected episodes again every hour
+
   sort_tv:
     priority: 2
     no_entries_ok: yes
@@ -66,6 +77,7 @@ tasks:
           else
             cp "{{ location }}" "/storage/series/{{ tvdb_series_name }}/Season {{ series_season }}/{{ tvdb_series_name }} - {{ series_id }}{{ location | pathext }}"
           fi
+  
   sort_movies:
     priority: 2
     no_entries_ok: yes
@@ -86,6 +98,7 @@ tasks:
          else
            cp "{{ location }}" "/storage/films/{{ movie_name }} ({{ movie_year }})/{{ movie_name }} ({{ movie_year }}){{ location | pathext }}"
          fi
+  
   remove_stale_torrents:
     from_transmission:
       host: transmission
