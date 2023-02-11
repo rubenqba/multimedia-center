@@ -13,7 +13,8 @@ templates:
     series:
       settings:
         tv:
-          exact: yes
+          begin: S01E01
+          # exact: yes
           propers: 12 hours
           quality: 720p
       tv:
